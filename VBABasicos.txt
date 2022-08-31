@@ -1,0 +1,120 @@
+funciones
+
+isError(celda.value)
+isEmpty(variable)
+isNumeric(variable)
+isDate(celda.value)
+
+Right(texto,5)
+Left(texto,5)
+Len(texto)
+Mid(texto,inicio,final)
+InStr(posicionInicialdebusqueda, texto, "cadenaabuscar",3)
+UCase(textoamauscula)
+LCase(textoaminuscula)
+Worksheet.Function.Proper(textoanombrepropio)
+Trim(textoacortarespacios)
+LTrim(textoizquierda)
+RTrim(textoderecha)
+StrReverse(textoavoltear)
+
+Date
+Now
+Year(fecha)
+Month(fecha)
+Day(fecha)
+TimeValue(fecha)
+Hour(fecha)
+Minute(fecha)
+Second(fecha)
+FormatDateTime(fecha, vbGeneralDate)
+FormatDateTime(fecha, vbLongDate)
+FormatDateTime(fecha, vbLongTime)
+FormatDateTime(fecha, vbShortDate)
+FormatDateTime(fecha, vbShortTime)
+Format(fecha, "long date")
+Format(fecha, "long time")
+Format(fecha, "D")
+Format(fecha, "h:m:s")
+Format(fecha, "mmmm")
+
+FormatPercent(numero,decimales)
+Round(numero,decimales)
+WorksheetFunction.RoundDown(nuemro,decimales)
+Int(numeroaredondear)
+Sgn(numeroasabersiespositivonegativoocero)
+Val(stringanumero)
+Cint(stringainteger)
+Cdbl(stringadouble)
+CDate(numeroostringafecha)
+
+FileDataTime(rutadelarchivo"ThisWorkbook.FullName")
+FileDataTime(rutadelacarpeta"ThisWorkbook.path")
+Mkdir(ruta & "\" & nombrecarpeta)
+Name "rutaynombredearchivoamover" As "nuevarutaynombredearchivoamover"
+FileCopy "rutaynombredearchivoacopiar","rutaynombredearchivoacopiar"
+Kill "rutaynombredearchivoaeliminar"
+
+nombrearchivo = Dir("rutaynombredelarchivo") /si no existe devuelve cadena vacia
+nombrecarpeta = Dir("rutacarpeta",vbDirectory) /si no existe devuelve cadena vacia
+
+if condicion then
+	sentencias
+elseif
+	sentencias
+else
+	sentencias
+end if
+
+Select Case Variable
+	case 'opcion1':
+		sentencias
+	case 'opcion2':
+		sentencias
+	case 'opcion3':
+		sentencias
+	case 10 to 14:
+		sentencias
+	case 15,16,17:
+		sentencias
+	case is > 20:
+		sentencias
+	case else
+		sentencias
+end select
+
+For i=1 to valor step 1
+	sentencias
+next i
+
+do while condicion
+	sentencias
+loop 
+
+Do
+	sentencias
+loop while condicion
+
+
+public/private sub procedimiento(byval/byref variable1 as string, byval/byref variable2 as double)
+	sentencias
+end sub
+
+sub saludo(oprional nombre as string)
+	sentencias
+end sub
+
+function funcion(numero1 as double, numero2 as double) as double
+	sentencias
+	funcion = valor
+end function
+
+procedimiento variable1, variable2
+call procedimiento(variable1,variable2)
+call módulo1.funcion(1,2)
+procedimiento variable2 := variable2, variable1 := variable1
+
+
+
+
+
