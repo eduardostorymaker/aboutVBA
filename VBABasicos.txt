@@ -114,7 +114,95 @@ call procedimiento(variable1,variable2)
 call módulo1.funcion(1,2)
 procedimiento variable2 := variable2, variable1 := variable1
 
+/terminar procedimiento
+exit sub
+/terminar funcion
+exit function
+/terminar for
+exit for
+/do while
+exit do
 
+//////////
+//fechas y horas
+/////////
 
+dim hora as date
+
+hora = fecha - inte(fecha)	
+
+if hora >= 0.5 then
+	jornada = "tarde"
+else
+	jornada = "mañana"
+end if
+
+////////////////
+//vectores
+/////////////
+/un vector tiene que esta dimensionado para rellenar los datos sino saldra error
+/si no sabes cuantos datos tendra el vector, hacer un do while y redimensionar el vector en cada loop
+
+/los vectores inician en 0, pero si quieres forazar a q inicien en uno se delara option base 1 al inicioantes de los procedimientos
+option base 1
+
+dim vector(6) as string
+dim vector(1 to 6) as string	
+dim matriz(3,4) as long
+dim matriz(1 to 3,1 to 4) as long
+
+/devuelve limite superior del vector -> 6
+ubound(vector)
+/devuelve limite inferior del vector -> 1
+lbound(vector) 
+/devuelve limite maximo de la matriz, dimension 1 -> 3
+ubound(matriz,1) 
+/devuelve limite minimo de la matriz, dimension 1 -> 1
+lbound(matriz,1) 
+/devuelve limite maximo de la matriz, dimension 2 -> 4
+ubound(matriz,1) 
+/devuelve limite maximo de la matriz, dimension 2 -> 1
+lbound(matriz,1) 
+
+dim vectorpalabras() as string
+vectorpalabras = Split(frase," ")
+frase = join(vectorpalabras," ")
+
+filtrado = filter(vectorfuente,cadenaabuscar,true(coincidencias)false(excluidos),binariosensibleamayusculas/textononosensible/databaseaccess)
+
+/redimensionar un vector
+ReDim vector(1 to 10)
+/redimensionar un vector preservando los datos
+ReDim Preserve vector(1 to 15)
+
+/borrar vector, dimension y datos
+Erase vector
+
+////////////
+/Parametros indefinidos
+//////////
+
+sub procedimiento(variable as string, ParamArray vector() as variant)
+
+end sub
+
+//////////
+//funciones como vector
+////////
+
+function funcion(variable as double) as double()
+
+	funcion = vector
+
+end function
+
+//////////
+//funciones con parametro vector
+////////
+function funcion(byref variable() as double) as double
+
+	funcion = valor
+
+end function
 
 
