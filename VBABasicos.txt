@@ -206,3 +206,44 @@ function funcion(byref variable() as double) as double
 end function
 
 
+//////////////
+/type(objetos)
+////////////
+
+/definir antes de los procedimientos
+public/private type objeto
+	propiedad1 as string
+	propiedad2 as integer
+end type
+
+objeto.propiedad1
+
+///////////
+/enum
+//////////
+
+/definir antes de los procedimientos
+public/private enum color
+	rojo = 1
+	azul = 2
+	verde = 3
+end enum
+
+color.rojo
+
+/enumerador oculto
+/cuando se utiliza no aparece en la lista inteligente
+/se suele utilizar first y last en listas consecutivas para saber el numero inicio y final y validar si un elemento esta dentro de la lista
+
+public/private enum color
+	[_First] = 1
+	rojo = 1
+	azul = 2
+	[_magenta] = 3
+	verde = 4
+	[_Last] = 4
+end enum
+
+for i = color.[_First] to color.[_Last]
+
+next i
