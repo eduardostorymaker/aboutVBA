@@ -247,3 +247,100 @@ end enum
 for i = color.[_First] to color.[_Last]
 
 next i
+
+
+/////////
+/Objetos
+/////////
+
+////////
+/Application
+
+/refrescar todos las formulas
+Application.Calculate
+Worksheets(1).Calculate
+Range("A1").Calculate
+
+/Actualizacion automatica de las celdas
+Application.Calculation = xlAutomatic
+
+/cerrar el archivo
+Application.Quit
+
+/agregar el mismo valor a distintos conjuntos de celdas
+Application.Union(Range("J1:J2"),Range("M1:M5")).Value = "Prueba Union"
+
+/Cambiar el titulo de la venta de excel
+Application.Caption = "Nuevo nombre ventana excel"
+
+/borrar una hoja de calculo, va a requerir confirmacion
+Sheets("hoja2").Delete
+/forzar el cierre, deshabilitando display alerts y volviendolo a habilitar
+Applications.DisplayAlerts = false
+Sheets("hoja2").Delete
+Applications.DisplayAlerts = true
+
+/deshabilitar el parpado de excel al cambiar de estados
+Application.ScreenUpdating = false
+Application.ScreenUpdating = true
+
+/ocultar la aplicacion, esperar 2 sengundos, volver a mostrar la aplicacion
+Application.Visible = false
+Application.Wait(now+timevalue("00:00:02"))
+Application.Visible = true
+ 
+
+////////
+/Workbook
+
+/nombre de libro activo
+ActiveWorkbook.Name
+
+/nombre del libro donde esta la macro
+ThisWorkbook.Name
+/ruta
+ThisWorkbook.Path
+/nombre y ruta
+ThisWorkbook.FullName
+/autor
+ThisWorkbook.Author
+/verificar si se guardo, true or false
+ThisWorkbook.Saved
+/hoja activa
+ThisWorkbook.VBProject.Name = "Proyecto Propiedades"
+/nombre hoja actva
+ThisWorkbook.ActiveSheet.Name
+/Password al abrir el archivo
+ThisWorkbook.Password = 1234
+/si tiene contraseña, true or false
+ThisWorkbook.HasPassword
+/Si esta protegido, true or false
+ThisWorkbook.ProtectStructure
+/Contraseña para escritura
+ThisWorkbook.WritePassword  = 1234
+/si tiene habilitado el backup
+ThisWorkbook.CreateBackup
+/habilitar el backup
+ThisWorkbook.CreateBackup = true
+/Activar
+ThisWorkbook.Activate
+/Cerrar libro, cerrar libro sin preguntar si guardar
+Workbooks("Libro1").Close
+Workbooks("Libro1").Close False
+/Guardar
+ThisWorkbook.Save
+/GuardarComo
+ThisWorkbook.SaveAs  "C:\Usuarios\Eduardo\otros\nombrearchivo.xls"
+/Abrir
+Workbooks.Open RutaArchivo&NombreArchivo
+
+
+
+/activar el primer libro
+Workbooks("1").activate
+
+/codigo q solo vale en thisworkbook. Nombre del libro utilizando ME
+ME.Name
+
+
+T
