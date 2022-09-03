@@ -1,0 +1,228 @@
+Public Function leernumero(numero As Long)
+    'Dim numero As Long
+    Dim numeroletra As String
+    Dim tamano As Integer
+    Dim leer As String
+    'numero = 1001000
+    numeroletra = CStr(numero)
+    tamano = Len(numeroletra)
+    'MsgBox tamano
+
+    If tamano = 1 Then
+
+        leer = unacifra(numeroletra)
+        
+    ElseIf tamano = 2 Then
+        
+        leer = doscifras(numeroletra)
+        
+    ElseIf tamano = 3 Then
+        
+        leer = trescifras(numeroletra)
+        
+    ElseIf tamano = 4 Then
+        
+        leer = cuatrocifras(numeroletra)
+    
+    ElseIf tamano = 5 Then
+        
+        leer = cincocifras(numeroletra)
+    
+    ElseIf tamano = 6 Then
+        
+        leer = seiscifras(numeroletra)
+    
+    ElseIf tamano = 7 Then
+        
+        leer = sietecifras(numeroletra)
+        
+        
+    End If
+    
+    leernumero = Trim(leer)
+
+End Function
+
+
+Function unacifra(numeroletra As String)
+
+    Dim leer As String
+
+    Select Case numeroletra
+        Case "1": leer = "un"
+        Case "2": leer = "dos"
+        Case "3": leer = "tres"
+        Case "4": leer = "cuatro"
+        Case "5": leer = "cinco"
+        Case "6": leer = "seis"
+        Case "7": leer = "siete"
+        Case "8": leer = "ocho"
+        Case "9": leer = "nueve"
+            
+    End Select
+    
+    unacifra = leer
+
+End Function
+
+Function doscifras(numeroletra As String)
+
+    Dim leer As String
+
+    If Int(numeroletra) < 30 Then
+        
+        Select Case numeroletra
+            Case "11": leer = "once"
+            Case "12": leer = "doce"
+            Case "13": leer = "trece"
+            Case "14": leer = "catorce"
+            Case "15": leer = "quince"
+            Case "16": leer = "dieciseis"
+            Case "17": leer = "doecisiete"
+            Case "18": leer = "dieciocho"
+            Case "19": leer = "diecinueve"
+            Case "20": leer = "veinte"
+            Case "21": leer = "veintiun"
+            Case "22": leer = "veintidos"
+            Case "23": leer = "veintitres"
+            Case "24": leer = "veinticuatro"
+            Case "25": leer = "veinticinco"
+            Case "26": leer = "veintiseis"
+            Case "27": leer = "veintisiete"
+            Case "28": leer = "veintiocho"
+            Case "29": leer = "veintinueve"
+                
+        End Select
+    Else
+        
+        Select Case Left(numeroletra, 1)
+            Case "3": leer = "treinta"
+            Case "4": leer = "cuarenta"
+            Case "5": leer = "cincuenta"
+            Case "6": leer = "sesenta"
+            Case "7": leer = "setenta"
+            Case "8": leer = "ochenta"
+            Case "9": leer = "noventa"
+                    
+        End Select
+            
+        If Right(numeroletra, 1) <> "0" Then
+            numeroletra = Right(numeroletra, 1)
+            
+            leer = leer & " y " & unacifra(numeroletra)
+        End If
+            
+    End If
+
+    doscifras = leer
+    
+End Function
+
+
+Function trescifras(numeroletra As String)
+    
+    Dim leer As String
+    
+    Select Case Left(numeroletra, 1)
+        Case "1":
+            If Right(numeroletra, 2) = "00" Then
+                leer = "cien"
+            Else
+                leer = "ciento"
+            End If
+        Case "2": leer = "docientos"
+        Case "3": leer = "trecientos"
+        Case "4": leer = "cuatrocientos"
+        Case "5": leer = "quinientos"
+        Case "6": leer = "seicientos"
+        Case "7": leer = "setecientos"
+        Case "8": leer = "ochocientos"
+        Case "9": leer = "novecientos"
+                    
+    End Select
+        
+    If Mid(numeroletra, 2, 1) = "0" Then
+    
+        numeroletra = Right(numeroletra, 1)
+                
+        leer = leer & " " & unacifra(numeroletra)
+    
+    Else
+    
+        numeroletra = Right(numeroletra, 2)
+                
+        leer = leer & " " & doscifras(numeroletra)
+    
+    End If
+    
+    trescifras = leer
+    
+End Function
+
+
+Function cuatrocifras(numeroletra As String)
+
+    Dim leer As String
+    
+    Select Case Left(numeroletra, 1)
+        Case "1": leer = "mil"
+        Case Else: leer = unacifra(Left(numeroletra, 1)) & " mil"
+                    
+    End Select
+    
+    numeroletra = Right(numeroletra, 3)
+                
+    leer = leer & " " & trescifras(numeroletra)
+    
+    cuatrocifras = leer
+    
+End Function
+
+Function cincocifras(numeroletra As String)
+    
+    Dim leer As String
+  
+    Select Case Left(numeroletra, 2)
+        Case "10": leer = "diez mil"
+        Case Else: leer = doscifras(Left(numeroletra, 2)) & " mil"
+                    
+    End Select
+    
+    numeroletra = Right(numeroletra, 3)
+                
+    leer = leer & " " & trescifras(numeroletra)
+    
+    cincocifras = leer
+    
+End Function
+
+Function seiscifras(numeroletra As String)
+
+    Dim leer As String
+    
+    If Left(numeroletra, 3) <> "000" Then
+        leer = trescifras(Left(numeroletra, 3)) & " mil"
+    End If
+    
+    numeroletra = Right(numeroletra, 3)
+                
+    leer = leer & " " & trescifras(numeroletra)
+    
+    seiscifras = leer
+    
+End Function
+
+Function sietecifras(numeroletra As String)
+    
+    Dim leer As String
+    
+    leer = unacifra(Left(numeroletra, 1)) & " millon"
+    
+    numeroletra = Right(numeroletra, 6)
+                
+    leer = leer & " " & seiscifras(numeroletra)
+    
+    sietecifras = leer
+    
+End Function
+
