@@ -343,4 +343,183 @@ Workbooks("1").activate
 ME.Name
 
 
-T
+///////Eventos workbook
+
+///se selecciona en la ventana de programacion y el codigo se ejecuta cuando ocurra el evento
+
+/cuando se abre la hoja
+open
+/cuando se abre una nueva hoja
+newsheet
+/antesde cerrar
+BeforeClose
+/antes de guardar
+Befor save
+
+**indica la ultima fila que tiene datos
+Range(rango).End(x1Up).row
+**
+
+/agregar un consolidado de hojas nuevas
+
+private sub Workbook_NewSheet (byval hoja as Object)
+
+	numerofila = Sheets("HojaConsolidar").Range("a65536").End(xlup).row+1
+	sheets("HojaConsolidar").range("A"&numerofila).Value = sh.name
+	sheets("HojaConsolidar").range("B"&numerofila).Value = now
+
+end sub
+
+
+////////
+/Worksheets o sheets
+
+/se puede utilizar worksheets o sheets
+
+/el indice se determina por la posicion de la pestaña, 1, 2, 3..
+sheets(indice)
+/encontrar el indice de una oja
+sheets("nombre").index
+/ocultar hora (-1 / 0 / 2 )(xlSheetVisible/xlSheetHidden/xlSheetVeryHidden)(true/false)
+sheets("nombre").visible = true
+/seleccionar varia hojas
+sheets(Array("hoja1","hoja2","hoja3")).select
+/activar una hoja, solo se puede seleccionar una a la vez
+sheets("hoja2").activate
+/agregar una hoja, cuando la agregas se activa
+sheet.add.name = "mi hoja"
+/eliminar hojas
+Applications.DisplayAlerts = false
+sheets(1).delete
+Applications.DisplayAlerts = true
+/mover hoja
+sheets("hoja4").Move after:= sheets("hoja1")
+sheets("hoja4").Move before:= sheets("hoja1")
+/copiar hoja
+sheets("hoja10").copy after:= sheets("hoja1")
+/proteger
+sheets(1).Protect Password := "1234", content:= true
+/desproteger
+sheets(1).Unprotect Password := "1234"
+/cantidad de hojas
+worksheets.count
+
+//////////////eventos sheets
+
+/se deve de seleccionar la hoja, worksheet y luego el evento
+
+/cuando se hace funciones o formulas
+Calulate
+/antes del click dercho
+beforeRightClick
+/cambiar la seleccion
+SelectionChange
+/al cambiar
+change
+/antes del doble click
+beforedobleclick
+
+**informacion de las celdas seleccionadas
+target.address
+***
+
+with ActivateWindow
+	.scrollColumn = target.column
+	.scrollRow = targer.row
+end with
+
+/Desactivar el click derecho
+private sub worksheet_beforerightclick (byval target as range, cancel as boolean)
+	
+	cancel = true
+	msgbox "El click derecho esta desactivado"
+end sub
+
+/bloquear conjunto de celdas al dar doble click
+
+private sub worksheet_beforedoubleclick (byval target as range, cancel as boolean)
+
+	if not application.instersect (target, range("a1:c30")) is nothing then
+		cancel = true
+		msgbox "evento prohibido"
+	end if
+
+end sub
+
+/registrar los cambios sucedidos en una celda en la hoja Cambios
+
+private sub worrksheet_change(byval target as range)
+	if not application.intersect (target, range("a1:c30")) is nothing then
+		fila = sheets("Cambios").[a1000000].End(xlup).row+1
+		sheets("Cambios").Range("a"&fila).value = Target.address
+		sheets("Cambios").Range("b"&fila).value = Target.value
+		sheets("Cambios").Range("c"&fila).value = now
+		sheets("Cambios").Range("d"&fila).value = Application.username
+	end if
+end 
+
+////////
+/Range
+///////
+/moverse una fila abajo
+range(rango).offset(1,0)
+/utilizando formulas, se tiene q escribir la formula en igles
+range(rango).offset(1,0).formula = "=sum(B2:B10)"
+/utilizando formulas en tu idioma
+range(rango).offset(1,0).FormulaLocal = "=suma(B2:B10)"
+/mostrando filas y columnas
+Activecell.row
+Activecell.column
+/seleccionado un rango
+range(rango).select
+/activando una celda
+range(celda).activate
+/calculo automatico de formulas
+range(celda).calculate
+/cortar y pegar
+/1ra forma
+range(celda).cut Range(otracelda)
+/2da forma
+range(celda).cut
+range(otracelda).select
+avtivesheet.paste
+/copiado y pegado especial
+range(celdas).copy
+range(otracelda).pastespecial xlpastevalues
+/borrar celdas, las de la derecha toman su lugar
+range(celdas).delete
+/se especifica que se moveran las de la derecha
+range(celdas).delete xlshifttoleft
+/se especifica que se moveran las de abajo
+range(celdas).delete xlshifttoup
+/limpiar (borrar) celdas sin mover las otras, borra valores contenidos formatos
+range(celdas).clear
+/limpiar solo valores
+range(celdas).clearcontents
+/añadir comentario
+range(celdas).addcomet = "comentario"
+/seleccionar filas, selecciona filas del 1 al 10 con todas las columnas
+rows("1:10").select
+/seleccionar columnas, del A al E y todas las filas
+columns("A:E").select
+/cantidad de filas
+range(rango).rows.count
+/cantidad de columnas
+range(rango).columns.count
+
+//////identificar ultima fila
+/1er
+msgbox Activesheet.usedrange.specialcells(xlCellTypeLastCell).row
+/2do, si tiene celdas vacias no las cuenta
+msgbox worksheetfunction.countA(Activesheet.columns(1))
+/3ro, buscar el dato desde lo mas bajo
+msgbox range("A65536").End(xlUp).row
+msgbox [A65536].End(xlUp).row
+
+////////
+/foreach
+///////
+
+for each item in arreglo
+	msgbox item
+next item
